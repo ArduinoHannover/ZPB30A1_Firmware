@@ -1,3 +1,7 @@
+# Eagle save files
+*.s#?
+*.b#?
+
 # Prerequisites
 *.d
 
