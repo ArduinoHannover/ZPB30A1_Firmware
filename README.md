@@ -2,6 +2,8 @@
 
 This repository is there to build an open-source firmware for the ZPB30A1 electronic load. The original Firmware is protected and can therefore not been read and improved partially.
 
+![Hacked](https://github.com/ArduinoHannover/ZPB30A1_Firmware/raw/master/images/hacked.jpg)
+
 ## Hardware
 
 The ZPB30A1 uses a STM8S005K6 running at 12 MHz.
@@ -34,7 +36,7 @@ The ZPB30A1 uses a STM8S005K6 running at 12 MHz.
 |  12  | PB4/AIN4 | IN PUP    | Encoder 1                | Frontpanel
 |  13  | PB3/AIN3 | IN Analog | Input voltage            | `VIN / 3`
 |  14  | PB2/AIN2 | IN Analog | Sense voltage            | `0.137565 V * V_SENSE + 0.0965910 V`
-|  15  | PB1/AIN1 | IN Analog | Load voltage             | `0.121221 V * V_POWER + 0.0847433 V`
+|  15  | PB1/AIN1 | IN Analog | Load voltage             | `0.121221 V * V_POWER + 0.0847433 V` (real offset voltage by 510k : 10k would be ~0.0961538 V) 
 |  16  | PB0/AIN0 | IN Analog | Thermistor input         | <!--`t = 121.104 - 22.8585 * V_TEMP` (±1°C)-->
 |  17  | PE5      | OUT       | Enable                   | Must be LOW to enable load regulation, otherwise MOSFET stays off (no load)
 |  18  | PC1/T1C1 | OUT PWM   | I-Set                    | `I = 12.9027 * DUTY_PERCENT + 0.0130276` (800Hz)
@@ -68,8 +70,23 @@ Currently this repository does not contain that many information, as this will b
  - CW (Constant Power)
  - CR (Constant Resistance)
  - CV (Constant Voltage)
+ - BAT (Battery capacity test)
 - Continous output of data via UART
 - Logging of Ah, Wh, J (?) in every mode
 - Adjusting shunt resistance (if replaced with e.g. 100 mΩ for an offset as low as 20 mA instead of 200 mA, not the resistance itself but the value in software)
 - Toggle beeper, auto shutdown
 - Nice menus even we got just that small seven segments
+
+### Original error codes
+
+| Code   | Meaning
+| ------ | ---
+| `Err1` | Ultra-high voltage for battery capacity testing. [whatever this should be]
+| `Err2` | V<sub>BATT</sub> &lt; V<sub>THRESHOLD</sub>, reversed or not connected
+| `Err3` | Line resistance to high; The set current can't be delivered
+| `Err4` | Circuit failed somewhere somehow. [Unknown error]
+| `Err6` | Input voltage is inapropiate (12V/0.5A), if using a correct power supply, check PB3 and PD3 for shorts or open contacts
+| `Otp`  | Over temperature protection [if everything is cool, check the thermistor value @ 25°C / 77°F]
+| `Ert`  | Temperature sensore failure or temperature too low
+| `ouP`  | Overvoltage Protection [Sense can measure 35 V max]
+| `oPP`  | Transient power protection [Peaks?]
