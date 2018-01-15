@@ -4,17 +4,23 @@
 
 # Prerequisites
 *.d
+*.asm
 
 # Object files
 *.o
 *.ko
 *.obj
 *.elf
+*.rel
 
 # Linker output
 *.ilk
+*.lk
 *.map
 *.exp
+*.lst
+*.rst
+*.sym
 
 # Precompiled Headers
 *.gch
@@ -38,13 +44,16 @@
 *.app
 *.i*86
 *.x86_64
+*.ihx
 *.hex
 
 # Debug files
 *.dSYM/
 *.su
+*.sdb
 *.idb
 *.pdb
+*.cdb
 
 # Kernel Module Compile Results
 *.mod*
