@@ -71,11 +71,10 @@ As there are just a few compilers out there and just one open source solution, w
 
 Development started using a STM8S Discovery, which is using a STM8S003K3. This is incompatible with the 005 on the load, as UART2 is UART1, PWM on FAN is not available and there are no internal PullUps on the encoder pins.
 
-- [ ] Different modes
+- [ ] Different modes:
  - [x] CC (Constant Current, as default)
- - [ ] CW (Constant Power)
- - [ ] CR (Constant Resistance)
- - [ ] CV (Constant Voltage)
+ - [x] CW (Constant Power)
+ - [x] CR (Constant Resistance)
  - [ ] BAT (Battery capacity test)
 - [ ] Continous output of data via UART
 - [ ] Logging of Ah, Wh, J (?) in every mode
