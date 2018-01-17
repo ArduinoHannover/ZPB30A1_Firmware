@@ -63,7 +63,7 @@ I-SET runs now at 571 Hz, which gives also good results.
 
 ## Software
 
-It seems like they have activated the Read Out Protection, so when running a flash readout, it just dumps zeros. So there is no real software reverse engineering possible. Software needs to be build from scratch.
+~It seems like they have activated the Read Out Protection, so when running a flash readout, it just dumps zeros.~ Using STVP-STM32 on Windows confirmed my guess and made it even worse. So not only the ROP is set, the write protection is also set. So there neither real software reverse engineering possible nor can you recycle the existing processor. Software needed to be build from scratch.
 
 As there are just a few compilers out there and just one open source solution, we'll be using [Small Device C Compiler (SDCC)](http://sdcc.sourceforge.net/).
 
@@ -72,16 +72,16 @@ As there are just a few compilers out there and just one open source solution, w
 Development started using a STM8S Discovery, which is using a STM8S003K3. This is incompatible with the 005 on the load, as UART2 is UART1, PWM on FAN is not available and there are no internal PullUps on the encoder pins.
 
 - [ ] Different modes:
- - [x] CC (Constant Current, as default)
- - [x] CW (Constant Power)
- - [x] CR (Constant Resistance)
- - [ ] BAT (Battery capacity test)
-- [ ] Continous output of data via UART
+  - [x] CC (Constant Current, as default)
+  - [x] CW (Constant Power)
+  - [x] CR (Constant Resistance)
+  - [ ] BAT (Battery capacity test)
+- [x] Continous output of data via UART
 - [ ] Logging of Ah, Wh, J (?) in every mode
 - [x] Adjusting shunt resistance (if replaced with e.g. 100 mΩ for an offset as low as 20 mA instead of 200 mA, not the resistance itself but the value in software)
- - :information_source: Not needed, we can safely trim the current down to almost 0 mA by PWM
+  - :information_source: Not needed, we can safely trim the current down to almost 0 mA by PWM
 - [ ] Toggle beeper, auto shutdown
- - Currently no beeper active
+  - Currently no beeper active
 - [x] Nice menus even though we got just that small seven segments
 
 
@@ -89,11 +89,11 @@ Development started using a STM8S Discovery, which is using a STM8S003K3. This i
 
 | Param           | Range    | Value
 | --------------- | -------- | ---
-| Voltage Input   | 0-30 V   | ± 2 digits (oversampling the 10 bit ADC to get 12 bit)
-| Current control | 0-999 mA | ± 0.2 mA
-|                 | 1-10 A   | ± 1 mA
+| Voltage Input   | 0-30 V   | ± 0.3% ± 20 mV (oversampling the 10 bit ADC to get 12 fake bit)
+| Current control | 0-10 A   | ± 0.1% ± 1 mA
 | Temperature     | 30-90°C  | ± 1.5 °C
 
+Due to multiplication of the tolerances in constant power and constant resistance mode no concrete specifications are given.
 
 ## Original Software
 
