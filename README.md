@@ -24,6 +24,9 @@ The ZPB30A1 uses a STM8S005K6 running at 16 MHz with an external 12 MHz crystal 
 
 ### Pinout
 
+<details>
+<summary>Pinout Table</summary>
+
 | Pin  | Pin Name | Direction | Function                 | Note
 | ---: | -------- | --------- | ------------------------ | ---
 |   1  | NRST     | IN PUP    | NRST                     | Connect to ST-Link
@@ -58,6 +61,8 @@ The ZPB30A1 uses a STM8S005K6 running at 16 MHz with an external 12 MHz crystal 
 |  30  | PD5/U2TX | OUT       | Tx                       | 115200 baud 8n1
 |  31  | PD6/U2RX | IN        | Rx                       | 115200 baud 8n1
 |  32  | PD7/TLI  | IN        | L                        | Interrupt
+
+</details>
 
 I-SET runs now at 571 Hz, which gives also good results.
 
@@ -97,7 +102,8 @@ Due to multiplication of the tolerances in constant power and constant resistanc
 
 ## Original Software
 
-### Error codes
+<details>
+<summary>Error codes</summary>
 
 | Code   | Meaning
 | ------ | ---
@@ -110,3 +116,5 @@ Due to multiplication of the tolerances in constant power and constant resistanc
 | `Ert`  | Temperature sensore failure or temperature too low
 | `ouP`  | Overvoltage Protection [Sense can measure 35 V max]
 | `oPP`  | Transient power protection [Peaks?]
+
+</summary>
