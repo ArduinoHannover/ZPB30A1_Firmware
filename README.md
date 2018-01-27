@@ -82,12 +82,14 @@ Development started using a STM8S Discovery, which is using a STM8S003K3. This i
   - [x] CR (Constant Resistance)
   - [ ] BAT (Battery capacity test)
 - [x] Continous output of data via UART
-- [ ] Logging of Ah, Wh, J (?) in every mode
+- [x] Logging of Ah, Wh, J (?) in every mode
 - [x] Adjusting shunt resistance (if replaced with e.g. 100 mΩ for an offset as low as 20 mA instead of 200 mA, not the resistance itself but the value in software)
   - :information_source: Not needed, we can safely trim the current down to almost 0 mA by PWM
 - [ ] Toggle beeper, auto shutdown
   - Currently no beeper active
 - [x] Nice menus even though we got just that small seven segments
+- [ ] Automatic toggling on/off by timer
+- [ ] Manual toggling on/off by external interrupt
 
 
 ### Specifications
@@ -99,6 +101,17 @@ Development started using a STM8S Discovery, which is using a STM8S003K3. This i
 | Temperature     | 30-90°C  | ± 1.5 °C
 
 Due to multiplication of the tolerances in constant power and constant resistance mode no concrete specifications are given.
+
+### Errors
+
+| Code  | Meaning
+| ----- | ---
+| `OVP` | Overvoltage Protection [cutting at > 30V]
+| `UVP` | V<sub>BATT</sub> &lt; V<sub>THRESHOLD</sub>, reversed or not connected
+| `OLP` | The set current can't be delivered, check for PC2 or Zener-Diode
+| `PWR` | Input voltage is inapropiate (12V/0.5A), if using a correct power supply, check PB3 and PD3 for shorts or open contacts
+| `OTP` | Over temperature protection [if everything is cool, check the thermistor value @ 25°C / 77°F]
+| `UTP` | Temperature sensore failure or temperature too low
 
 ## Original Software
 
